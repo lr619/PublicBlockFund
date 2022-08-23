@@ -1,18 +1,13 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css'
 import * as fcl from "@onflow/fcl";
 import "../flow/config.js";
+import Navbar from '../components/NavBar';
 
 export default function Home() {
-  const [user, setUser] = useState({ loggedIn: false });
-
-  // This keeps track of the logged in 
-  // user for you automatically.
-  useEffect(() => {
-    fcl.currentUser().subscribe(setUser);
-  }, [])
 
   return (
     <div className='bg-[#011E30] flex flex-col min-h-screen'>
@@ -22,19 +17,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className='container mx-auto flex-1 p-5'>
-        <div className='mb-5 flex justify-between items-center pr-10 pt-2'>
-          <h1 className={styles.sooth}>VOTING</h1>
-          <div className='flex space-x-4 items-center'>
-            <h1 className='text-[#38E8C6]'>Address: </h1>
-            <h1 className='border px-7 text-center text-[#38E8C6] text-sm py-1 rounded-xl border-[#38E8C6] w-56'>{user.loggedIn ? user.addr : "Please connect wallet -->"}</h1>
-          </div>
-          <div>{!user.loggedIn ? <button className='border rounded-xl border-[#38E8C6] px-5 text-sm text-[#38E8C6] py-1'
-            onClick={fcl.authenticate}>Connect</button> : <button className='border rounded-xl border-[#38E8C6]
-          px-5 text-sm text-[#38E8C6] py-1' onClick={fcl.unauthenticate}>Logout</button>}
+        <Navbar />
+
+        <div className='flex justify-center pt-20'>
+          <div className='space-y-10 p-2 w-1/2 text-center'>
+            <h1 className='text-gray-400 mb-10 font-semibold text-2xl'>
+              Welcome to the coolest Voting tutorial out on the market right now, brought to you by none other than the greatest DAO on the flow blockchain... <a className='text-[#38E8C6] underline' href='https://www.ecdao.org/'>Emerald City Dao</a>
+            </h1> 
+            <Link href='/proposals'>
+              <a className='pt-10'>
+                <button className='bg-[#38E8C6] rounded-full text-lg text-center py-2 px-12'>Enter Dapp</button> 
+              </a>
+            </Link>
           </div>
         </div>
-        <hr className='border-[#38E8C6]' />
+
       </main>
+      
+      
       <footer>
         <img className="w-full" src='/city.svg' alt='city' />
         <div className='bg-black flex pt-10 pb-5 justify-center text-white'>
