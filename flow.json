@@ -6,13 +6,7 @@
 		}
 	},
 	"contracts": {
-		"FungibleToken": {
-			"source": "./flow/cadence/utility/FungibleToken.cdc",
-			"aliases": {
-				"testnet": "0x9a0766d93b6608b7"
-			}
-		},
-		"ExampleToken": "./flow/cadence/ExampleToken.cdc"
+		"Vote": "./flow/cadence/Vote.cdc"
 	},
 	"networks": {
 		"emulator": "127.0.0.1:3569",
@@ -28,8 +22,7 @@
 	"deployments": {
 		"emulator": {
 			"emulator-account": [
-				"FungibleToken",
-				"ExampleToken"
+				"Vote"
 			]
 		}
 	}
