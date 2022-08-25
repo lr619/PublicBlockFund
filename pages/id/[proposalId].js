@@ -103,8 +103,10 @@ export default function Id() {
       <div className='w-[70%] space-y-6'>
         <div className='flex mb-12 justify-between'>
           <div>
-            <h1 className='text-gray-200 text-3xl font-bold'>{proposal.name}</h1>
+            <h1 className='text-gray-200 text-3xl font-bold'>{proposal.ref.name}</h1>
             <p className='text-gray-300 opacity-75'>Proposal submitted by: {process.env.NEXT_PUBLIC_CONTRACT_ADDRESS}</p>
+            <p className='text-gray-300 opacity-75'>Start date: {new Date(proposal.ref.startTime * 1000).toLocaleString()}</p>
+            <p className='text-gray-300 opacity-75'>End date: {new Date(proposal.ref.endTime * 1000).toLocaleString()}</p>
           </div>
 
           <div className='text-gray-400 text-lg font-semibold pr-2'>
