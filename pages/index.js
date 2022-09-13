@@ -36,10 +36,10 @@ export default function Home() {
       pub struct Proposal {
           pub let ref: &Vote.Proposal{Vote.ProposalPublic}?
           pub let votes: {Address: UInt8}?
-          pub let voteCounts: {UInt8: UInt64}?
+          pub let voteCounts: {UInt8: [Address]}?
           pub let stage: UInt8?
       
-          init(ref: &Vote.Proposal{Vote.ProposalPublic}?, votes: {Address: UInt8}?, voteCounts: {UInt8: UInt64}?, stage: Vote.Stage?) {
+          init(ref: &Vote.Proposal{Vote.ProposalPublic}?, votes: {Address: UInt8}?, voteCounts: {UInt8: [Address]}?, stage: Vote.Stage?) {
               self.ref = ref
               self.votes = votes
               self.voteCounts = voteCounts
@@ -67,9 +67,9 @@ export default function Home() {
         </div>
         <div className='flex items-center justify-between mb-7'>
           <h1 className='text-gray-200 text-2xl font-bold'>Proposals</h1>
-          { !user.loggedIn 
-            ?<p className='text-gray-300'>Connect wallet to make a proposal</p>
-            :<Link href='/submit'>
+          {!user.loggedIn
+            ? <p className='text-gray-300'>Connect wallet to make a proposal</p>
+            : <Link href='/submit'>
               <a className='rounded-lg font-semibold text-md py-2 px-6 bg-gray-300'>Submit Proposal</a>
             </Link>
           }

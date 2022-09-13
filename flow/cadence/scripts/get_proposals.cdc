@@ -19,10 +19,10 @@ pub fun main(): [Proposal] {
 pub struct Proposal {
     pub let ref: &Vote.Proposal{Vote.ProposalPublic}?
     pub let votes: {Address: UInt8}?
-    pub let voteCounts: {UInt8: UInt64}?
+    pub let voteCounts: {UInt8: [Address]}?
     pub let stage: UInt8?
 
-    init(ref: &Vote.Proposal{Vote.ProposalPublic}?, votes: {Address: UInt8}?, voteCounts: {UInt8: UInt64}?, stage: Vote.Stage?) {
+    init(ref: &Vote.Proposal{Vote.ProposalPublic}?, votes: {Address: UInt8}?, voteCounts: {UInt8: [Address]}?, stage: Vote.Stage?) {
         self.ref = ref
         self.votes = votes
         self.voteCounts = voteCounts
