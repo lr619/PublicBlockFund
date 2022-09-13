@@ -1,9 +1,12 @@
 import Link from 'next/link';
 import * as fcl from "@onflow/fcl";
+import { useAuth } from "../contexts/AuthContext";
 import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [proposals, setProposals] = useState([]);
+  const { user } = useAuth();
+
 
   useEffect(() => {
     getProposals();
@@ -64,9 +67,12 @@ export default function Home() {
         </div>
         <div className='flex items-center justify-between mb-7'>
           <h1 className='text-gray-200 text-2xl font-bold'>Proposals</h1>
-          <Link href='/submit'>
-            <a className='rounded-lg font-semibold text-md py-2 px-6 bg-gray-300'>Submit Proposal</a>
-          </Link>
+          { !user.loggedIn 
+            ?<p className='text-gray-300'>Connect wallet to make a proposal</p>
+            :<Link href='/submit'>
+              <a className='rounded-lg font-semibold text-md py-2 px-6 bg-gray-300'>Submit Proposal</a>
+            </Link>
+          }
         </div>
         {proposals.map((proposal, index) => (
           <Link href={`/id/${proposal.ref.uuid}`} key={index}>
