@@ -45,7 +45,7 @@ export default function Id() {
       }
       `,
       args: (arg, t) => [
-        arg(proposalId, t.UInt64),
+        arg(parseInt(proposalId), t.UInt64),
         arg(vote, t.String)
       ],
       proposer: fcl.authz,
@@ -77,10 +77,10 @@ export default function Id() {
       pub struct Proposal {
           pub let ref: &Vote.Proposal{Vote.ProposalPublic}?
           pub let votes: {Address: UInt8}?
-          pub let voteCounts: {UInt8: UInt64}?
+          pub let voteCounts: {UInt8: [Address]}?
           pub let stage: UInt8?
       
-          init(ref: &Vote.Proposal{Vote.ProposalPublic}?, votes: {Address: UInt8}?, voteCounts: {UInt8: UInt64}?, stage: Vote.Stage?) {
+          init(ref: &Vote.Proposal{Vote.ProposalPublic}?, votes: {Address: UInt8}?, voteCounts: {UInt8: [Address]}?, stage: Vote.Stage?) {
               self.ref = ref
               self.votes = votes
               self.voteCounts = voteCounts
@@ -89,7 +89,7 @@ export default function Id() {
       }
       `,
       args: (arg, t) => [
-        arg(proposalId, t.UInt64)
+        arg(parseInt(proposalId), t.UInt64)
       ]
     });
 
@@ -110,9 +110,9 @@ export default function Id() {
           </div>
 
           <div className='text-gray-400 text-lg font-semibold pr-2'>
-            <p>For: {proposal.voteCounts['0']}</p>
-            <p>Against: {proposal.voteCounts['1']}</p>
-            <p>Abstain: {proposal.voteCounts['2']}</p>
+            <p>For: {proposal.voteCounts['0']?.length}</p>
+            <p>Against: {proposal.voteCounts['1']?.length}</p>
+            <p>Abstain: {proposal.voteCounts['2']?.length}</p>
           </div>
         </div>
         <div className='flex items-center justify-between mb-7'>
@@ -143,22 +143,25 @@ export default function Id() {
           <div className="border h-64 px-5 py-3 rounded-xl w-1/3 text-white text-center overflow-auto">
             <h1 className="mb-4 text-2xl font-semibold">FOR</h1>
             <div className="text-center space-y-2">
-              <p className="text-[#38E8C6] text-lg">0xf8d6e0586b0a20c7</p>
-              <p className="text-[#38E8C6] text-lg">0xf8d6e0586b0a20c7</p>
+              {proposal.voteCounts[0]?.map((vote, i) => (
+                <p key={i} className="text-[#38E8C6] text-lg">{vote}</p>
+              ))}
             </div>
           </div>
           <div className="border h-64 px-5 py-3 rounded-xl w-1/3 text-white text-center overflow-auto">
             <h1 className="mb-4 text-2xl font-semibold">AGAINST</h1>
             <div className="text-center space-y-2">
-              <p className="text-[#38E8C6] text-lg">0xf8d6e0586b0a20c7</p>
-              <p className="text-[#38E8C6] text-lg">0xf8d6e0586b0a20c7</p>
+              {proposal.voteCounts[1]?.map((vote, i) => (
+                <p key={i} className="text-[#38E8C6] text-lg">{vote}</p>
+              ))}
             </div>
           </div>
           <div className="border h-64 px-5 py-3 rounded-xl w-1/3 text-white text-center overflow-auto">
             <h1 className="mb-4 text-2xl font-semibold">ABSTAIN</h1>
             <div className="text-center space-y-2">
-              <p className="text-[#38E8C6] text-lg">0xf8d6e0586b0a20c7</p>
-              <p className="text-[#38E8C6] text-lg">0xf8d6e0586b0a20c7</p>
+              {proposal.voteCounts[2]?.map((vote, i) => (
+                <p key={i} className="text-[#38E8C6] text-lg">{vote}</p>
+              ))}
             </div>
           </div>
         </div>

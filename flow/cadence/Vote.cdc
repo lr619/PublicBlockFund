@@ -25,7 +25,7 @@ pub contract Vote {
         pub let startTime: UFix64
         pub let endTime: UFix64
         pub fun getVotes(): {Address: UInt8}
-        pub fun getVoteCounts(): {UInt8: UInt64}
+        pub fun getVoteCounts(): {UInt8: [Address]}
         pub fun getStage(): Stage
     }
 
@@ -38,7 +38,7 @@ pub contract Vote {
         pub let endTime: UFix64
 
         access(self) let votes: {Address: UInt8}
-        access(self) let voteCounts: {UInt8: UInt64}
+        access(self) let voteCounts: {UInt8: [Address]}
 
         access(contract) fun vote(user: Address, decision: Decision) {
             pre {
@@ -47,14 +47,14 @@ pub contract Vote {
                 getCurrentBlock().timestamp <= self.endTime: "This vote is not ready to vote on yet."
             }
             self.votes[user] = decision.rawValue
-            self.voteCounts[decision.rawValue] = self.voteCounts[decision.rawValue]! + 1
+            self.voteCounts[decision.rawValue]!.append(user)
         }
 
         pub fun getVotes(): {Address: UInt8} {
             return self.votes
         }
 
-        pub fun getVoteCounts(): {UInt8: UInt64} {
+        pub fun getVoteCounts(): {UInt8: [Address]} {
             return self.voteCounts
         }
 
@@ -75,7 +75,7 @@ pub contract Vote {
             self.startTime = startTime
             self.endTime = endTime
             self.votes = {}
-            self.voteCounts = { Decision.for.rawValue: 0, Decision.against.rawValue: 0, Decision.abstain.rawValue: 0 }
+            self.voteCounts = { Decision.for.rawValue: [], Decision.against.rawValue: [], Decision.abstain.rawValue: [] }
         }
     }
 
