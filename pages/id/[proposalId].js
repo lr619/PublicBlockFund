@@ -117,8 +117,9 @@ export default function Id() {
         </div>
         <div className='flex items-center justify-between mb-7'>
           <h1 className='text-gray-200 text-2xl font-bold'>Proposal:</h1>
-          <div className='space-x-4'>
-            {!proposal.votes[user.addr] ?
+          { proposal.stage == 1 ?
+            <div className='space-x-4'>
+            { !proposal.votes[user.addr] ?
               <>
                 <button className='rounded-lg font-semibold text-md py-2 px-6 text-white bg-green-500' onClick={() => castVote("for")}>For</button>
                 <button className='rounded-lg font-semibold text-md py-2 px-6 text-white bg-red-500' onClick={() => castVote("against")}>Against</button>
@@ -130,7 +131,7 @@ export default function Id() {
                   <p className="font-semibold rounded-lg text-md py-3 px-6 text-white bg-red-500">You voted: Against</p> :
                   <p className="font-semibold rounded-lg text-md py-2 px-6 text-gray-800 bg-gray-300">You voted: Abstain</p>
             }
-          </div>
+          </div> : <p className='text-gray-300 border rounded-lg px-4 py-2'>Proposal is yet to start</p> }
         </div>
         <div className='rounded-lg bg-none text-white flex items-center justify-center'>
           <img src={`https://nftstorage.link/ipfs/${proposal.ref.image}`} />
@@ -138,7 +139,7 @@ export default function Id() {
         <div className='text-gray-300 opacity-75 text-lg'>
           {proposal.ref.description}
         </div>
-        <div className="flex space-x-4 pt-10">
+        <div className="flex space-x-9 pt-10">
           <div className="border h-64 px-5 py-3 rounded-xl w-1/3 text-white text-center overflow-auto">
             <h1 className="mb-4 text-2xl font-semibold">FOR</h1>
             <div className="text-center space-y-2">
