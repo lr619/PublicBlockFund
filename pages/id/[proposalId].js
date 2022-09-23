@@ -56,10 +56,11 @@ export default function Id() {
 
     console.log('Transaction Id', transactionId);
     await fcl.tx(transactionId).onceSealed();
-    getProposal();
+    getProposal(proposalId);
   }
 
   async function getProposal(proposalId) {
+    console.log(proposalId);
     const response = await fcl.query({
       cadence: `
       import Vote from 0xDeployer
@@ -117,21 +118,21 @@ export default function Id() {
         </div>
         <div className='flex items-center justify-between mb-7'>
           <h1 className='text-gray-200 text-2xl font-bold'>Proposal:</h1>
-          { proposal.stage == 1 ?
+          {proposal.stage == 1 ?
             <div className='space-x-4'>
-            { !proposal.votes[user.addr] ?
-              <>
-                <button className='rounded-lg font-semibold text-md py-2 px-6 text-white bg-green-500' onClick={() => castVote("for")}>For</button>
-                <button className='rounded-lg font-semibold text-md py-2 px-6 text-white bg-red-500' onClick={() => castVote("against")}>Against</button>
-                <button className='rounded-lg font-semibold text-md py-2 px-6 bg-gray-300' onClick={() => castVote("abstain")}>Abstain</button>
-              </> :
-              proposal.votes[user.addr] == 0 ?
-                <p className="font-semibold rounded-lg text-md py-2 px-6 text-white bg-green-500">You voted: For</p> :
-                proposal.votes[user.addr] == 1 ?
-                  <p className="font-semibold rounded-lg text-md py-3 px-6 text-white bg-red-500">You voted: Against</p> :
-                  <p className="font-semibold rounded-lg text-md py-2 px-6 text-gray-800 bg-gray-300">You voted: Abstain</p>
-            }
-          </div> : <p className='text-gray-300 border rounded-lg px-4 py-2'>Proposal is yet to start</p> }
+              {!proposal.votes[user.addr] ?
+                <>
+                  <button className='rounded-lg font-semibold text-md py-2 px-6 text-white bg-green-500' onClick={() => castVote("for")}>For</button>
+                  <button className='rounded-lg font-semibold text-md py-2 px-6 text-white bg-red-500' onClick={() => castVote("against")}>Against</button>
+                  <button className='rounded-lg font-semibold text-md py-2 px-6 bg-gray-300' onClick={() => castVote("abstain")}>Abstain</button>
+                </> :
+                proposal.votes[user.addr] == 0 ?
+                  <p className="font-semibold rounded-lg text-md py-2 px-6 text-white bg-green-500">You voted: For</p> :
+                  proposal.votes[user.addr] == 1 ?
+                    <p className="font-semibold rounded-lg text-md py-3 px-6 text-white bg-red-500">You voted: Against</p> :
+                    <p className="font-semibold rounded-lg text-md py-2 px-6 text-gray-800 bg-gray-300">You voted: Abstain</p>
+              }
+            </div> : <p className='text-gray-300 border rounded-lg px-4 py-2'>Proposal is yet to start</p>}
         </div>
         <div className='rounded-lg bg-none text-white flex items-center justify-center'>
           <img src={`https://nftstorage.link/ipfs/${proposal.ref.image}`} />

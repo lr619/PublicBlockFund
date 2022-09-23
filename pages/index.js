@@ -61,14 +61,13 @@ export default function Home() {
         <div className='space-y-3 mb-12'>
           <h1 className='text-gray-200 text-2xl font-bold'>Welcome to your DAO</h1>
           <p className='text-gray-400 text-lg font-semibold '>
-            Here you can view all proposals submitted by fellow token holders and also submit your very own proposal as well.
-            You would need a minimum of * tokens to submit a proposal.
+            Here you can view all the proposals that have been created by members of your community.
           </p>
         </div>
         <div className='flex items-center justify-between mb-7'>
           <h1 className='text-gray-200 text-2xl font-bold'>Proposals</h1>
           {!user.loggedIn
-            ? <p className='text-gray-300'>Connect wallet to make a proposal</p>
+            ? null
             : <Link href='/submit'>
               <a className='rounded-lg font-semibold text-md py-2 px-6 bg-gray-300'>Submit Proposal</a>
             </Link>
