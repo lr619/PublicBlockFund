@@ -89,44 +89,44 @@ After clicking "Approve", you will be taken back to the main dashboard. You shou
 
 <img src="https://i.imgur.com/cWsfwBF.png" alt="a vote is now in play" width="400" />
 
+---
+
 # ✏️ Checkpoint 3: Voting
 
-> In a terminal, run `npm run mint 0xf8d6e0586b0a20c7 30.0`. 
+Now that a proposal has been created, lets click on it and see what it looks like:
 
-<img src="https://i.imgur.com/hTEzmqe.png" alt="mint fungible tokens" />
+<img src="" alt="active proposal" width="400" />
 
-This will mint 30 tokens to their address (`0xf8d6e0586b0a20c7`).
+You should see:
+- Name
+- Description
+- Image
+- Vote counts
+- Who voted for what option
+- Start & end date
+- Who submitted the proposal
 
-> Go back to your application and refresh the balance again. Notice that you have a balance of 30.0 now! Woooohoooo.
+You can click to vote a certain way by clicking one of either "For", "Against", or "Abstain".
 
----
+> Click one of the voting options and see the transaction popup appear:
 
-# 📘 Checkpoint 4: Setup empty user Vault 
-> Log out of the current account and login to another account. Refresh the balance again. You will see an error appear:
+<img src="" alt="tx to vote" width="400" />
 
-<img src="https://i.imgur.com/hmS1eYZ.png" alt="error when getting tokens" width="400" />
-
-Again, this is because we haven't set up the user's account. We will do this again by clicking the `Setup Vault` button:
-
-<img src="https://i.imgur.com/4XEwntp.png" alt="setup vault for user account" width="400" />
-
-This will set up the user's account so it can receive tokens.
-
-> Try refreshing the balance again. You will see a balance of 0.0. So let's transfer some from the other account!
+If you click approve, you should see the vote tally change, and your address get added to the list of voters below. Remember, you can't vote again!
 
 ---
 
-# 💾 Checkpoint 5: Transfer Tokens
+# ✏️ Checkpoint 4: Vote with a Different Account
 
-> 📔 Log out of your account and go back to the Service Account. In the main box, put `0x179b6b1cb6755e31` as the recipient and `10.0` as the amount, then click `Transfer Tokens`:
+Let's try to submit a vote from another account!
 
-<img src="https://i.imgur.com/guxcLRz.png" alt="transfer tokens" />
+> At the top, click "Logout" and log in with a different account than before.
 
-This will transfer tokens to the `0x179b6b1cb6755e31` account. Log in to that account, refresh the balance, and you will see you have 10.0 tokens now!
+> Click on the same proposal and vote once again.
 
----
+You should now see there are two votes casted under the proposal. Congradulations, you have a voting system properly working on your local emulator!
 
-# 💾 Checkpoint 6: Deploy it to testnet!
+# 💾 Checkpoint 5: Deploy it to testnet!
 
 📔 Ready to deploy to a public testnet?!?
 
@@ -162,21 +162,18 @@ This will transfer tokens to the `0x179b6b1cb6755e31` account. Log in to that ac
 "deployments": {
   "emulator": {
     "emulator-account": [
-			"FungibleToken",
-			"ExampleToken"
+			"Vote"
 		]
   },
   "testnet": {
     "testnet-account": [
-      "ExampleToken"
+      "Vote"
     ]
   }
 }
 ```
 
-Notice that we do not want to re-deploy FungibleToken. That is because they are already deploy and live on Flow testnet!
-
-> 🚀 Deploy your ExampleToken smart contract:
+> 🚀 Deploy your Vote smart contract:
 
 ```sh
 flow project deploy --network=testnet
@@ -189,9 +186,8 @@ flow project deploy --network=testnet
 In your .env file, change the following:
 1. `NEXT_PUBLIC_CONTRACT_ADDRESS` to your generated testnet address
 2. `NEXT_PUBLIC_STANDARD_ADDRESS` to `0x9a0766d93b6608b7`
-3. `PRIVATE_KEY` to your private key
-4. `NEXT_PUBLIC_ACCESS_NODE` to `https://rest-testnet.onflow.org`
-5. `NEXT_PUBLIC_WALLET` to `https://fcl-discovery.onflow.org/testnet/authn` 
+3. `NEXT_PUBLIC_ACCESS_NODE` to `https://rest-testnet.onflow.org`
+4. `NEXT_PUBLIC_WALLET` to `https://fcl-discovery.onflow.org/testnet/authn` 
 
 You can now terminate all your terminals since we no longer need to run our own local blockchain or wallet. Everything lives on testnet!
 
