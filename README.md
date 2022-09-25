@@ -1,13 +1,13 @@
 # 💎 Emerald Academy
 
-## 🚩 Challenge 3: Voting
+## 🚩 Challenge 4: Voting
 
-🎫 Deploy a FungibleToken contract to learn the basics of the Flow blockchain and Cadence. You'll use:
+🎫 Deploy a Voting contract to learn the basics of voting on the Flow blockchain and Cadence. You'll use:
 - The local Flow emulator to deploy smart contracts. 
 - The local Flow dev wallet to log into test accounts.
 - A template Next.js app with sample scripts and transactions to interact with your contract.
 
-🌟 The final deliverable is a DApp that lets users create their own fungible token and transfer them to another account on Flow testnet.
+🌟 The final deliverable is a DApp that spins up an open DAO that lets community members create proposals and vote within it.
 
 💬 Meet other builders working on this challenge and get help in the [Emerald City Discord](https://discord.gg/emeraldcity)!
 
@@ -21,13 +21,13 @@ Required:
 * [Flow CLI](https://docs.onflow.org/flow-cli/install/)  (🧨 Make sure to install the correct link for your system 🧨). You know you have installed it if you type `flow version` in your terminal and it prints a version.
 
 ```sh
-git clone https://github.com/emerald-dao/2-fungible-token.git
+git clone https://github.com/emerald-dao/4-voting.git
 ```
 
 > in a terminal window, 📱 install the dependencies start your frontend:
 
 ```sh
-cd 2-fungible-token
+cd 4-voting
 npm install
 npm run dev
 ```
@@ -35,7 +35,7 @@ npm run dev
 > in a second terminal window, start your 👷‍ local emulator:
 
 ```bash
-cd 2-fungible-token
+cd 4-voting
 flow emulator start -v
 ```
 
@@ -44,7 +44,7 @@ flow emulator start -v
 > in a third terminal window, 💾 deploy your contract and 💸 start your local wallet:
 
 ```bash
-cd 2-fungible-token
+cd 4-voting
 flow project deploy
 flow dev-wallet
 ```
@@ -63,23 +63,33 @@ We'll be using **the local Flow dev wallet**.
 
 ---
 
-# 📘 Checkpoint 2: Reading Your Balance
+# 📘 Checkpoint 2: Create a Proposal
 
-> When you log in, click the little spinner next to your balance in the top right. Notice that you get an error:
+After logging in, you will be brought to the main dashboard of your DAO. You can see there are no active proposals, so let's make one!
 
-<img src="https://i.imgur.com/IIXjt8h.png" alt="error when getting balance" width="400" />
+> Press the "Submit Proposal" button on the right side
 
-The reason for this is because we haven't set up a vault in the user's account. On Flow, you need a vault in your account to be able to store specific tokens. Let's set that up that now.
+<img src="https://i.imgur.com/HMfsBPQ.png" alt="filling in proposal fields" width="400" />
 
-> Click the `Setup Vault` button:
+To create a proposal, you must fill in:
+- The name of the proposal
+- The image of the proposal
+- A start & end date
+- A description of the proposal
 
-<img src="https://i.imgur.com/4XEwntp.png" alt="setup vault for user account" width="400" />
+> Click "Submit Proposal" to run a transaction that will create the new proposal on-chain
 
-This will set up the user's account so it can receive tokens.
+<img src="https://i.imgur.com/Fg8Qmuz.png" alt="run submit proposal tx" width="400" />
 
-> Try refreshing the balance again. You will see a balance of 0.0. So let's mint some tokens!
+A popup will appear to create your new proposal. This is a transaction that will change data on the blockchain. Specifically, it is creating a new `Proposal` resource and storing it in your DAOs collection of proposals. 
 
-# ✏️ Checkpoint 3: Minting Fungible Tokens
+> For more on Cadence & Resources, you can look at the contract code in `/flow/cadence/Vote.cdc/` or check out our <a href="https://github.com/emerald-dao/beginner-cadence-course">Beginner Cadence Course</a>
+
+After clicking "Approve", you will be taken back to the main dashboard. You should now see a vote in play:
+
+<img src="https://i.imgur.com/cWsfwBF.png" alt="a vote is now in play" width="400" />
+
+# ✏️ Checkpoint 3: Voting
 
 > In a terminal, run `npm run mint 0xf8d6e0586b0a20c7 30.0`. 
 

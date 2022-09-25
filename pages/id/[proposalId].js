@@ -135,7 +135,7 @@ export default function Id() {
             </div> : <p className='text-gray-300 border rounded-lg px-4 py-2'>Proposal is yet to start</p>}
         </div>
         <div className='rounded-lg bg-none text-white flex items-center justify-center'>
-          <img src={`https://nftstorage.link/ipfs/${proposal.ref.image}`} />
+          <img className='max-w-sm' src={`https://nftstorage.link/ipfs/${proposal.ref.image}`} />
         </div>
         <div className='text-gray-300 opacity-75 text-lg'>
           {proposal.ref.description}
