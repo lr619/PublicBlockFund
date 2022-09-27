@@ -84,12 +84,12 @@ pub contract Vote {
             self.name = name
             self.description = description
             self.image = image
-            // NOTE: We take away 1.0 here because on a local emulator,
+            // NOTE: We take away 100.0 here because on a local emulator,
             // time is not advanced unless a transaction is run. So this
             // is simply to prevent bugs on local emulator.  
             // In a a real world scenario, this line should just be:
             // `self.startTime = startTime`
-            self.startTime = startTime - 1.0
+            self.startTime = startTime - 100.0
             self.endTime = endTime
             self.votes = {}
             self.voteCounts = { Decision.for.rawValue: {}, Decision.against.rawValue: {}, Decision.abstain.rawValue: {} }

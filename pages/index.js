@@ -127,15 +127,12 @@ export default function Home() {
             {"<Replace this with a description of your DAO>"}
           </p>
         </div>
-        {!balance ? <button onClick={joinDAO} className='rounded-lg font-semibold text-md py-2 px-6 text-white bg-green-500'>Join this DAO</button> : <>
+        {!user.loggedIn ? null : !balance ? <button onClick={joinDAO} className='rounded-lg font-semibold text-md py-2 px-6 text-white bg-green-500'>Join this DAO</button> : <>
           <div className='flex items-center justify-between mb-7'>
             <h1 className='text-gray-200 text-2xl font-bold'>Proposals</h1>
-            {!user.loggedIn
-              ? null
-              : <Link href='/submit'>
-                <a className='rounded-lg font-semibold text-md py-2 px-6 bg-gray-300'>Submit Proposal</a>
-              </Link>
-            }
+            <Link href='/submit'>
+              <a className='rounded-lg font-semibold text-md py-2 px-6 bg-gray-300'>Submit Proposal</a>
+            </Link>
           </div>
           {proposals.map((proposal, index) => (
             <Link href={`/id/${proposal.ref.uuid}`} key={index}>
