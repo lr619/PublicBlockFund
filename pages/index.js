@@ -17,7 +17,10 @@ export default function Home() {
   }, [user])
 
   async function getBalance() {
-    if (!user.loggedIn) return 0.0;
+    if (!user.loggedIn) {
+      setBalance(null);
+      return;
+    }
     const response = await fcl.query({
       cadence: `
       import FungibleToken from 0xStandard
