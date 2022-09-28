@@ -122,9 +122,9 @@ export default function Home() {
     <div className='flex justify-center pt-20'>
       <div className='w-[70%] space-y-6'>
         <div className='space-y-3 mb-12'>
-          <h1 className='text-gray-200 text-2xl font-bold'>Welcome to {"<Example DAO>"}</h1>
+          <h1 className='text-gray-200 text-2xl font-bold'>Welcome to Emerald City DAO</h1>
           <p className='text-gray-400 text-lg font-semibold '>
-            {"<Replace this with a description of your DAO>"}
+            If you join this DAO, you are a really cool person.
           </p>
         </div>
         {!user.loggedIn ? null : !balance ? <button onClick={joinDAO} className='rounded-lg font-semibold text-md py-2 px-6 text-white bg-green-500'>Join this DAO</button> : <>

@@ -2,12 +2,12 @@
 
 ## 🚩 Challenge 4: Voting
 
-🎫 Deploy a Voting contract to learn the basics of voting on the Flow blockchain and Cadence. You'll use:
+🎫 Deploy a Voting contract to learn the basics of voting inside of a DAO on the Flow blockchain and Cadence. You'll use:
 - The local Flow emulator to deploy smart contracts. 
 - The local Flow dev wallet to log into test accounts.
 - A template Next.js app with sample scripts and transactions to interact with your contract.
 
-🌟 The final deliverable is a DApp that spins up an open DAO that lets community members create proposals and vote within it.
+🌟 The final deliverable is a DApp that spins up an open DAO that lets community members create proposals and vote within it based on token holdings that govern the DAO.
 
 💬 Meet other builders working on this challenge and get help in the [Emerald City Discord](https://discord.gg/emeraldcity)!
 
@@ -63,9 +63,33 @@ We'll be using **the local Flow dev wallet**.
 
 ---
 
-# 📘 Checkpoint 2: Create a Proposal
+# 📘 Checkpoint 2: Name & Describe Your DAO
 
-After logging in, you will be brought to the main dashboard of your DAO. You can see there are no active proposals, so let's make one!
+After logging in to our DApp, you will see that there is no name or description for our DAO:
+
+<img src="https://i.imgur.com/YxDuWN5.png" alt="empty" width="400" />
+
+> Open up `./pages/index.js` and scroll down until you see `{"<Example DAO>"}` and `{"<Replace this with a description of your DAO>"}`. Replace these lines with a name & description of your DAO.
+
+You will now see that being changed on your frontend:
+
+<img src="https://i.imgur.com/nRHh0Mr.png" alt="name & describe dao" width="400" />
+
+# 📘 Checkpoint 3: Join the DAO
+
+Now that we have given our DAO a name & description, let's join the DAO!
+
+> Click the "Join this DAO" button and you will see a transaction model pop up:
+
+<img src="https://i.imgur.com/pvRoZPb.png" alt="join dao tx" width="400" />
+
+If you click "Approve", you will be granted access to the DAO's main dashboard.
+
+Under the hood, you just set up your own token vault for the token that is governing this DAO. To see the smart contract for this token, you can go to `./flow/cadence/ExampleToken.cdc`
+
+# 📘 Checkpoint 4: Create a Proposal
+
+After joinin the DAO, you will be brought to the main dashboard of your DAO. You can see there are no active proposals, so let's make one!
 
 > Press the "Submit Proposal" button on the right side
 
@@ -87,15 +111,15 @@ A popup will appear to create your new proposal. This is a transaction that will
 
 After clicking "Approve", you will be taken back to the main dashboard. You should now see a vote in play:
 
-<img src="https://i.imgur.com/cWsfwBF.png" alt="a vote is now in play" width="400" />
+<img src="https://i.imgur.com/PQXUtbb.png" alt="a vote is now in play" width="400" />
 
 ---
 
-# ✏️ Checkpoint 3: Voting
+# ✏️ Checkpoint 5: Viewing a Proposal
 
 Now that a proposal has been created, lets click on it and see what it looks like:
 
-<img src="" alt="active proposal" width="400" />
+<img src="https://i.imgur.com/R78d772.png" alt="active proposal" width="400" />
 
 You should see:
 - Name
@@ -106,27 +130,49 @@ You should see:
 - Start & end date
 - Who submitted the proposal
 
+In order to actually vote however, we must own some tokens inside the DAO!
+
+---
+
+# ✏️ Checkpoint 6: Obtaining Tokens
+
+In order to obtain some tokens, let's actually mint some to our account.
+
+> In a new terminal window, run `npm run mint 0xf8d6e0586b0a20c7 30.0`
+
+This will mint 30.0 tokens to the account with address 0xf8d6e0586b0a20c7.
+
+If you go back to your application and refresh the page (making sure you are logged in with account 0xf8d6e0586b0a20c7), you will notice your balance update at the top:
+
+<img src="https://i.imgur.com/zH4fgxP.png" alt="balance update" width="400" />
+
+To see how this code worked, check out `./actions/mint_tokens.js`
+
+---
+
+# ✏️ Checkpoint 7: Voting
+
 You can click to vote a certain way by clicking one of either "For", "Against", or "Abstain".
 
 > Click one of the voting options and see the transaction popup appear:
 
-<img src="" alt="tx to vote" width="400" />
+<img src="https://i.imgur.com/AOjf5wx.png" alt="tx to vote" width="400" />
 
 If you click approve, you should see the vote tally change, and your address get added to the list of voters below. Remember, you can't vote again!
 
 ---
 
-# ✏️ Checkpoint 4: Vote with a Different Account
+# ✏️ Checkpoint 8: Vote with a Different Account
 
 Let's try to submit a vote from another account!
 
-> At the top, click "Logout" and log in with a different account than before.
+1. At the top, click "Logout" and log in with a different account than before.
+2. Join the DAO
+3. Mint tokens to the new account using the same command as in Checkpoint 6, making sure to change the address to the new account.
+4. Click on the same proposal and vote once again.
+5. Watch the tally change!
 
-> Click on the same proposal and vote once again.
-
-You should now see there are two votes casted under the proposal. Congradulations, you have a voting system properly working on your local emulator!
-
-# 💾 Checkpoint 5: Deploy it to testnet!
+# 💾 Checkpoint 9: Deploy it to testnet!
 
 📔 Ready to deploy to a public testnet?!?
 
@@ -162,11 +208,13 @@ You should now see there are two votes casted under the proposal. Congradulation
 "deployments": {
   "emulator": {
     "emulator-account": [
+      "ExampleToken",
 			"Vote"
 		]
   },
   "testnet": {
     "testnet-account": [
+      "ExampleToken",
       "Vote"
     ]
   }
@@ -186,8 +234,9 @@ flow project deploy --network=testnet
 In your .env file, change the following:
 1. `NEXT_PUBLIC_CONTRACT_ADDRESS` to your generated testnet address
 2. `NEXT_PUBLIC_STANDARD_ADDRESS` to `0x9a0766d93b6608b7`
-3. `NEXT_PUBLIC_ACCESS_NODE` to `https://rest-testnet.onflow.org`
-4. `NEXT_PUBLIC_WALLET` to `https://fcl-discovery.onflow.org/testnet/authn` 
+3. `PRIVATE_KEY` to your private key
+4. `NEXT_PUBLIC_ACCESS_NODE` to `https://rest-testnet.onflow.org`
+5. `NEXT_PUBLIC_WALLET` to `https://fcl-discovery.onflow.org/testnet/authn` 
 
 You can now terminate all your terminals since we no longer need to run our own local blockchain or wallet. Everything lives on testnet!
 
@@ -195,17 +244,21 @@ You can now terminate all your terminals since we no longer need to run our own 
 
 > On http://localhost:3000/, click "connect" and log in to your Blocto or Lilico wallet, making sure to copy the address you log in with.
 
-> In a terminal, run `npm run mint [THE ADDRESS YOU COPIED ABOVE] [AMOUNT OF TOKENS]`
+> Join the DAO and run the transaction. Wait ~30 seconds and then refresh the page. You should now be in the DAO.
+
+> Create a new proposal, same as before.
+
+> To obtain tokens, run `npm run mint [THE ADDRESS YOU COPIED ABOVE] [AMOUNT OF TOKENS]` like we did in Checkpoint 6.
 
 > In your terminal, you should see a printed "Transaction Id". If you go to [Testnet Flowscan](https://testnet.flowscan.org/) and paste in that Transaction Id, you should see information about that minting transaction.
 
-Click "Get NFTs", and you should see all your NFTs in your account!
+> Attempt to vote in your proposal.
 
 ---
 
 # 📝 Make Edits!
 
-🔏 You can also check out your smart contract `ExampleToken.cdc` in `flow/cadence/ExampleToken.cdc`.
+🔏 You can also check out your token smart contract `ExampleToken.cdc` in `flow/cadence/ExampleToken.cdc`, or your voting/DAO smart contract `Vote.cdc` in `flow/cadence/Vote.cdc`
 
 💼 Take a quick look at how your contract get deployed in `flow.json`.
 
