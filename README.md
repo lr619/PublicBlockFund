@@ -63,7 +63,7 @@ We'll be using **the local Flow dev wallet**.
 
 ---
 
-# 📘 Checkpoint 2: Name & Describe Your DAO
+# 🔖 Checkpoint 2: Name & Describe Your DAO
 
 After logging in to our DApp, you will see that there is no name or description for our DAO:
 
@@ -75,7 +75,7 @@ You will now see that being changed on your frontend:
 
 <img src="https://i.imgur.com/nRHh0Mr.png" alt="name & describe dao" width="400" />
 
-# 📘 Checkpoint 3: Join the DAO
+# 👪 Checkpoint 3: Join the DAO
 
 Now that we have given our DAO a name & description, let's join the DAO!
 
@@ -87,7 +87,7 @@ If you click "Approve", you will be granted access to the DAO's main dashboard.
 
 Under the hood, you just set up your own token vault for the token that is governing this DAO. To see the smart contract for this token, you can go to `./flow/cadence/ExampleToken.cdc`
 
-# 📘 Checkpoint 4: Create a Proposal
+# 📑 Checkpoint 4: Create a Proposal
 
 After joinin the DAO, you will be brought to the main dashboard of your DAO. You can see there are no active proposals, so let's make one!
 
@@ -115,7 +115,7 @@ After clicking "Approve", you will be taken back to the main dashboard. You shou
 
 ---
 
-# ✏️ Checkpoint 5: Viewing a Proposal
+# 👀 Checkpoint 5: Viewing a Proposal
 
 Now that a proposal has been created, lets click on it and see what it looks like:
 
@@ -134,7 +134,7 @@ In order to actually vote however, we must own some tokens inside the DAO!
 
 ---
 
-# ✏️ Checkpoint 6: Obtaining Tokens
+# 💸 Checkpoint 6: Obtaining Tokens
 
 In order to obtain some tokens, let's actually mint some to our account.
 
@@ -150,7 +150,7 @@ To see how this code worked, check out `./actions/mint_tokens.js`
 
 ---
 
-# ✏️ Checkpoint 7: Voting
+# 📤 Checkpoint 7: Voting
 
 You can click to vote a certain way by clicking one of either "For", "Against", or "Abstain".
 
@@ -162,7 +162,7 @@ If you click approve, you should see the vote tally change, and your address get
 
 ---
 
-# ✏️ Checkpoint 8: Vote with a Different Account
+# 📘 Checkpoint 8: Vote with a Different Account
 
 Let's try to submit a vote from another account!
 
@@ -227,7 +227,7 @@ Let's try to submit a vote from another account!
 flow project deploy --network=testnet
 ```
 
-<img src="https://i.imgur.com/M7CBp6A.png" alt="deploy contract to testnet" />
+<img src="https://i.imgur.com/nsASuV3.png" alt="deploy contract to testnet" />
 
 > Lastly, configure your .env file to point to Flow TestNet so we can interact with your new contract.
 
