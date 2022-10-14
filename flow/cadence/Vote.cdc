@@ -121,10 +121,10 @@ pub contract Vote {
         return &self.proposals[proposalId] as &Proposal{ProposalPublic}?
     }
 
-    pub fun getProposals(): [&Proposal{ProposalPublic}?] {
-        let answer: [&Proposal{ProposalPublic}?] = []
+    pub fun getProposals(): [&Proposal{ProposalPublic}] {
+        let answer: [&Proposal{ProposalPublic}] = []
         for proposalId in self.proposals.keys {
-            answer.append(self.getProposal(proposalId: proposalId))
+            answer.append(self.getProposal(proposalId: proposalId)!)
         }
         return answer
     }

@@ -85,15 +85,17 @@ Now that we have given our DAO a name & description, let's join the DAO!
 
 If you click "Approve", you will be granted access to the DAO's main dashboard.
 
-Under the hood, you just set up your own token vault for the token that is governing this DAO. To see the smart contract for this token, you can go to `./flow/cadence/ExampleToken.cdc`
+Under the hood, you just set up your own token vault for the token that is governing this DAO. 
+
+> To see the smart contract for this token, you can go to `./flow/cadence/ExampleToken.cdc`
+
+> To see how this transaction was run, check out the `joinDAO` function inside of `./pages/index.js`
 
 # 📑 Checkpoint 4: Create a Proposal
 
-After joinin the DAO, you will be brought to the main dashboard of your DAO. You can see there are no active proposals, so let's make one!
+After joining the DAO, you will be brought to the main dashboard of your DAO. You can see there are no active proposals, so let's make one!
 
 > Press the "Submit Proposal" button on the right side
-
-<img src="https://i.imgur.com/HMfsBPQ.png" alt="filling in proposal fields" width="400" />
 
 To create a proposal, you must fill in:
 - The name of the proposal
@@ -101,13 +103,17 @@ To create a proposal, you must fill in:
 - A start & end date
 - A description of the proposal
 
+<img src="https://i.imgur.com/HMfsBPQ.png" alt="filling in proposal fields" width="400" />
+
 > Click "Submit Proposal" to run a transaction that will create the new proposal on-chain
 
 <img src="https://i.imgur.com/Fg8Qmuz.png" alt="run submit proposal tx" width="400" />
 
 A popup will appear to create your new proposal. This is a transaction that will change data on the blockchain. Specifically, it is creating a new `Proposal` resource and storing it in your DAOs collection of proposals. 
 
-> For more on Cadence & Resources, you can look at the contract code in `/flow/cadence/Vote.cdc/` or check out our <a href="https://github.com/emerald-dao/beginner-cadence-course">Beginner Cadence Course</a>
+> To see how this transaction was run, check out the `submitProposal` function inside of `./pages/submit.js`
+
+> For more on Cadence & Resources, you can look at the contract code in `./flow/cadence/Vote.cdc` or check out our <a href="https://github.com/emerald-dao/beginner-cadence-course">Beginner Cadence Course</a>
 
 After clicking "Approve", you will be taken back to the main dashboard. You should now see a vote in play:
 
