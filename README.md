@@ -152,7 +152,7 @@ If you go back to your application and refresh the page (making sure you are log
 
 <img src="https://i.imgur.com/zH4fgxP.png" alt="balance update" width="400" />
 
-To see how this code worked, check out `./actions/mint_tokens.js`
+> To see how this command minted tokens to our account, check out `./actions/mint_tokens.js`
 
 ---
 
@@ -215,8 +215,8 @@ Let's try to submit a vote from another account!
   "emulator": {
     "emulator-account": [
       "ExampleToken",
-			"Vote"
-		]
+      "Vote"
+    ]
   },
   "testnet": {
     "testnet-account": [
@@ -246,19 +246,15 @@ In your .env file, change the following:
 
 You can now terminate all your terminals since we no longer need to run our own local blockchain or wallet. Everything lives on testnet!
 
-> Run `npm run dev` to start your application in a terminal.
+Let's try out our application on testnet:
 
-> On http://localhost:3000/, click "connect" and log in to your Blocto or Lilico wallet, making sure to copy the address you log in with.
-
-> Join the DAO and run the transaction. Wait ~30 seconds and then refresh the page. You should now be in the DAO.
-
-> Create a new proposal, same as before.
-
-> To obtain tokens, run `npm run mint [THE ADDRESS YOU COPIED ABOVE] [AMOUNT OF TOKENS]` like we did in Checkpoint 6.
-
-> In your terminal, you should see a printed "Transaction Id". If you go to [Testnet Flowscan](https://testnet.flowscan.org/) and paste in that Transaction Id, you should see information about that minting transaction.
-
-> Attempt to vote in your proposal.
+1. Run `npm run dev` to start your application in a terminal.
+2. On http://localhost:3000/, click "connect" and log in to your Blocto or Lilico wallet, making sure to copy the address you log in with.
+3. Join the DAO and run the transaction. Wait ~30 seconds and then refresh the page. You should now be in the DAO.
+4. Create a new proposal, same as before.
+5. To obtain tokens, run `npm run mint [THE ADDRESS YOU COPIED IN STEP 2] [AMOUNT OF TOKENS]` like we did in Checkpoint 6.
+6. In your terminal, you should see a printed "Transaction Id". If you go to [Testnet Flowscan](https://testnet.flowscan.org/) and paste in that Transaction Id, you should see information about that minting transaction.
+7. Attempt to vote in your proposal.
 
 ---
 
