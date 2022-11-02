@@ -130,8 +130,8 @@ pub contract Vote {
     }
 
     init() {
-        self.IdentityStoragePath = /storage/VoteIdentity
-        self.IdentityPublicPath = /public/VoteIdentity
+        self.IdentityStoragePath = /storage/EmeraldAcademyVotingIdentity
+        self.IdentityPublicPath = /public/EmeraldAcademyVotingIdentity
         self.AdminPath = /storage/VoteAdmin
         self.proposals <- {}
         self.account.save(<- create Admin(), to: self.AdminPath)
