@@ -1,40 +1,10 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import * as fcl from "@onflow/fcl";
 import { useAuth } from "../contexts/AuthContext";
 import "../flow/config";
 import styles from '../styles/Home.module.css'
 
 export default function Navbar() {
-  const { user, logOut, logIn } = useAuth();
-  const [balance, setBalance] = useState();
-
-  useEffect(() => {
-    getBalance();
-  }, [user])
-
-  async function getBalance() {
-    if (!user.loggedIn) {
-      setBalance(null);
-      return;
-    }
-    const response = await fcl.query({
-      cadence: `
-      import FungibleToken from 0xStandard
-      import ExampleToken from 0xDeployer
-
-      pub fun main(account: Address): UFix64? {
-          let vaultRef = getAccount(account).getCapability(ExampleToken.VaultBalancePath)
-                          .borrow<&ExampleToken.Vault{FungibleToken.Balance}>()
-
-          return vaultRef?.balance
-      }
-      `,
-      args: (arg, t) => [arg(user.addr, t.Address)]
-    });
-
-    setBalance(response);
-  }
+  const { user, logOut, logIn, balance } = useAuth();
 
   return (
     <div>
