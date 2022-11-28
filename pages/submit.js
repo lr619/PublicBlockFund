@@ -2,7 +2,6 @@ import * as fcl from "@onflow/fcl";
 import Router from "next/router";
 import { useState } from "react";
 import { NFTStorage } from "nft.storage";
-import { imageConfigDefault } from "next/dist/shared/lib/image-config";
 
 export default function Submit() {
   const [name, setName] = useState('');
