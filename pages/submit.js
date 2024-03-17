@@ -9,7 +9,7 @@ import { NFTStorage } from "nft.storage";
 import DepositModal from '../components/Deposit';
 import { Dialog, Transition } from '@headlessui/react';
 
-
+import { CohereClient } from "cohere-ai";
 
 export default function Submit() {
   const [name, setName] = useState('');
@@ -18,10 +18,13 @@ export default function Submit() {
   const [endTime, setEndTime] = useState();
   const [preview, setPreview] = useState();
   const [ipfsCid, setIpfsCid] = useState();
+  const [apiResponse, setApiResponse] = useState();
 
 
   const NFT_STORAGE_TOKEN = process.env.NEXT_PUBLIC_NFTSTORAGE_KEY;
   const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
+
+  
 
 
   async function uploadToIPFS(file) {
@@ -32,38 +35,66 @@ export default function Submit() {
   }
 
   async function submitProposal() {
-    const unixStartTime = +new Date(startTime) / 1000;
-    const unixEndTime = +new Date(endTime) / 1000;
-    console.log(name, description, ipfsCid, unixStartTime, unixEndTime);
+    setStartTime(Date.now() / 1000);
+     setEndTime(new Date(startTime) / 1000);
+    console.log(description);
+    console.log(name, description, ipfsCid, startTime, endTime);
+    if (!description && name) { // Check if `description` is empty and `name` is not
+    console.log("Fetching description for: ", name);
+    await fetchCohereData();
+    }else{
+      console.log("Description is already set.")
+    await createProposal()
+  }
+}
+  async function fetchCohereData() {
+    try {
+      
+      const response = await fetch('api/cohereData', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ searchTerm: name })
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+  
+      const data = await response.json();
+      setDescription(data.data); // Set the fetched description
+      console.log("Received description:", data.data);
+      
+      // After successfully fetching and setting description, proceed to create the proposal
+      await createProposal();
+    } catch (error) {
+      console.error("Fetching description failed:", error);
+    }
+  }
+    
+async function createProposal() {
+  try {
     const transactionId = await fcl.mutate({
       cadence: `
       import Vote from 0xDeployer
-
-      transaction(
-          name: String,
-          description: String,
-          image: String,
-          startTime: UFix64,
-          endTime: UFix64
-      ) {
-
-          let Admin: &Vote.Admin
-
-          prepare(signer: AuthAccount) {
-              self.Admin = signer.borrow<&Vote.Admin>(from: Vote.AdminPath) ?? panic("This signer is not an Admin and cannot make proposals!")
-          }
-
-          execute {
-              self.Admin.createProposal(name: name, description: description, image: image, startTime: startTime, endTime: endTime)
-          }
+      
+      transaction(name: String, description: String, image: String, startTime: UFix64, endTime: UFix64) {
+        let Admin: &Vote.Admin
+        
+        prepare(signer: AuthAccount) {
+          self.Admin = signer.borrow<&Vote.Admin>(from: Vote.AdminPath) ?? panic("This signer is not an Admin and cannot make proposals!")
+        }
+        
+        execute {
+          self.Admin.createProposal(name: name, description: description, image: image, startTime: startTime, endTime: endTime)
+        }
       }
       `,
       args: (arg, t) => [
         arg(name, t.String),
         arg(description, t.String),
         arg(ipfsCid, t.String),
-        arg(unixStartTime.toFixed(1), t.UFix64),
-        arg(unixEndTime.toFixed(1), t.UFix64)
+        arg(startTime, t.UFix64),
+        arg(endTime, t.UFix64)
       ],
       proposer: fcl.authz,
       payer: fcl.authz,
@@ -71,9 +102,12 @@ export default function Submit() {
       limit: 999
     });
 
-    console.log('Transaction Id', transactionId);
-    Router.push("/")
+    console.log('Transaction Id:', transactionId);
+    Router.push("/");
+  } catch (error) {
+    console.error("Submitting proposal failed:", error);
   }
+}
 
   return (
     <div className='flex justify-center pt-20'>
@@ -85,7 +119,7 @@ export default function Submit() {
           <div className='flex flex-col justify-between'>
             <div className="flex flex-col">
               <label className="text-gray-300 text-sm mb-3"> Proposal Title</label>
-              <input type="text" placeholder='Should Jacob Tucker receive 1 million dollars?'
+              <input type="text" placeholder='Thon Donation Drive'
                 className='px-7 py-3 w-[80%] focus:outline-none text-gray-200 focus:border-[#38E8C6] 
               bg-[#00344B] border rounded-lg  border-gray-100' onChange={(e) => setName(e.target.value)} />
             </div>
@@ -101,7 +135,7 @@ export default function Submit() {
               </div>
               <div className='flex flex-col space-y-12 pl-10 text-gray-300 text-sm'>
                 <label htmlFor="start" className="flex flex-col">
-                  Start Time
+                  Deadline
                   <input
                     type="datetime-local"
                     className="bg-[#00344B] rounded-lg px-5 py-2"
@@ -116,7 +150,7 @@ export default function Submit() {
           </div>
           <div className="flex flex-col">
             <label className="text-gray-300 text-sm mb-3"> Description</label>
-            <textarea className='rounded-lg py-3 px-7 bg-[#00344B] border border-gray-100 focus:outline-none focus:border-[#38E8C6] text-gray-200' rows={8} placeholder='This is a vote to determine if Jacob Tucker should be given 1 million dollars...' onChange={(e) => setDescription(e.target.value)} />
+            <textarea className='rounded-lg py-3 px-7 bg-[#00344B] border border-gray-100 focus:outline-none focus:border-[#38E8C6] text-gray-200' rows={8} placeholder='If left empty our Generative AI will fill in the desciption itself' onChange={(e) => setDescription(e.target.value)} />
           </div>
           <button className='rounded-lg py-3 px-7 text-lg font-semibold bg-[#2bbc9f]' onClick={submitProposal}>Submit Proposal</button>
         </div>

@@ -11,7 +11,7 @@ export default function Navbar() {
       <div className='mb-5 flex justify-between items-center pt-2'>
         <Link href="/">
           <a>
-            <h1 className={styles.sooth}>VOTING</h1>
+            <h1 className={styles.sooth}>BlockFund</h1>
           </a>
         </Link>
         <div className="flex gap-10">

@@ -177,7 +177,7 @@ export default function Id() {
         <div className='flex items-center justify-between mb-7'>
           {proposal.stage == 1 ?
             <div className='space-x-4'>
-            </div> : <p className='text-gray-300 border rounded-lg px-4 py-2'>Proposal is yet to start</p>}
+            </div> : <p className='text-gray-300 border rounded-lg px-4 py-2'>Goal: </p>}
         </div>
         <div className='rounded-lg bg-none text-white flex items-center justify-center'>
           <img className='max-w-sm' src={`https://nftstorage.link/ipfs/${proposal.ref.image}`} />
