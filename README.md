@@ -1,5 +1,5 @@
 # Blockfund
-
+THIS IS A PUBLIC VERSION OF MY REPO. PLEASE REPLACE ALL API KEYS WITH YOUR OWN PRIVATE ONES
 ## To build our contract we decided to follow Flow Blockchains Quickstart Voting app.
 
 Deploy a Voting contract to learn the basics of voting inside of a DAO on the Flow blockchain and Cadence. You'll use:
