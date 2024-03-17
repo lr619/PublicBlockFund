@@ -2,6 +2,7 @@ import Link from 'next/link';
 import * as fcl from "@onflow/fcl";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
 
 export default function DepositInfo() {
   const router = useRouter();
@@ -40,6 +41,7 @@ export default function DepositInfo() {
 
   if (depositInfo.id) {
     return (
+      <Container>
       <div className='flex justify-center pt-20 '>
         <div className='w-[70%] space-y-10 flex justify-center'>
           <Link href='/'>
@@ -50,28 +52,34 @@ export default function DepositInfo() {
                 </svg><p>go back</p></div>
             </a>
           </Link>
-          <div className='bg-[#00344B] md:w-[70%] p-5 rounded-lg'>
+          <div className='bg-[white] md:w-[70%] p-5 rounded-lg'>
             <div className='flex mb-6 justify-between items-center'>
               <div>
-                <h1 className='text-gray-200 text-xl font-bold'>#{depositInfo.id}</h1>
+                <h1 className='text-black text-xl font-bold'>#{depositInfo.id}</h1>
               </div>
 
             </div>
 
             <div className='flex items-center space-x-3'>
-              <p className='text-gray-300'>Amount Deposited:</p>
+              <p className='text-black'>Amount Deposited:</p>
               <p className='text-[#2bbc9f]'>{depositInfo.amount} FLOW</p>
             </div>
             <div className='flex items-center pt-8 space-x-3'>
-              <p className='text-gray-300'>Deposited by:</p>
+              <p className='text-black'>Deposited by:</p>
               <p className='text-[#2bbc9f]'>{depositInfo.proposedBy}</p>
             </div>
             <div className='pt-8 space-y-3'>
-              <p className='text-gray-300'>Description: <span className='text-gray-400'>{depositInfo.description}</span></p>
+              <p className='text-black'>Description: <span className='text-gray-400'>{depositInfo.description}</span></p>
             </div>
           </div>
         </div>
       </div>
+      </Container>
     )
   }
 }
+
+const Container = styled.div`
+  background-color:#1a1d25;
+
+  `

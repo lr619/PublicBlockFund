@@ -9,6 +9,8 @@ import { NFTStorage } from "nft.storage";
 import DepositModal from '../components/Deposit';
 import { Dialog, Transition } from '@headlessui/react';
 
+import styled from "styled-components";
+
 import { CohereClient } from "cohere-ai";
 
 export default function Submit() {
@@ -100,20 +102,18 @@ export default function Submit() {
 
 
   return (
-    <div className='flex justify-center pt-20'>
-      <div className='w-[70%] space-y-6'>
-        <div className='space-y-3 mb-12'>
+    <ContentWrapper>
+        <Title className='space-y-3 mb-12'>
           <h1 className='text-gray-200 text-2xl text-center font-bold uppercase'>What is your reason for fundraising?</h1>
-        </div>
-        <div className='flex flex-col space-y-7'>
-          <div className='flex flex-col justify-between'>
-            <div className="flex flex-col">
+        </Title>
+        <SubContentWrapper>
+            <TitileAndInput>
               <label className="text-gray-300 text-sm mb-3"> Proposal Title</label>
-              <input type="text" placeholder='Thon Donation Drive'
-                className='px-7 py-3 w-[80%] focus:outline-none text-gray-200 focus:border-[#38E8C6] 
-              bg-[#00344B] border rounded-lg  border-gray-100' onChange={(e) => setName(e.target.value)} />
-            </div>
-            <div className="flex space-x-10 pt-8">
+              <input type="text" placeholder='What is the title for your Block Fund?'
+                className='px-7 py-3 w-[80%] focus:outline-none text-black-200 focus:border-[white] 
+              bg-[white] border rounded-lg  border-gray-100' onChange={(e) => setName(e.target.value)} />
+            </TitileAndInput>
+            <ImgAndStartTime>
               <div className="flex flex-col w-1/3">
                 <label className="border rounded-xl h-48 flex items-center cursor-pointer justify-center text-white overflow-hidden" htmlFor="upload-button">
                   {
@@ -128,18 +128,104 @@ export default function Submit() {
                   Deadline
                   <input
                     type="datetime-local"
-                    className="bg-[#00344B] rounded-lg px-5 py-2"
+                    className="bg-[white] rounded-lg px-5 py-2"
                     id="start"
                     name="start"
                     onChange={(e) => setStartTime(e.target.value)} />
                 </label>
 
               </div>
-            </div>
+            </ImgAndStartTime>
 
-          </div>
-          <div className="flex flex-col">
+            </SubContentWrapper>
+          <Description>
             <label className="text-gray-300 text-sm mb-3"> Description</label>
+            <StyledTextarea
+      rows={8}
+      placeholder='This is a vote to determine if Jacob Tucker should be given 1 million dollars...'
+      onChange={(e) => setDescription(e.target.value)}
+    />          </Description>
+          <SubmitButton className='rounded-lg py-3 px-7 text-lg font-semibold bg-[white]' onClick={submitProposal}>Submit Block Fund</SubmitButton>
+    </ContentWrapper>
+  )
+}
+
+const ContentWrapper = styled.div`
+  background-color:#1a1d25;
+  width:98.8vw;
+  justify-content:center;
+  height:180vh;
+  align-items:center;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  `
+
+  const Title = styled.div`
+  color:white;
+  font-weight:bold; 
+  width:80%; `
+  
+
+  const SubContentWrapper = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  padding-bottom:2rem;
+  `
+  const TitileAndInput = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  width:70%;
+  `
+  const ImgAndStartTime = styled.div`
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+  align-items:center;
+  width:70%;
+  height:100%;
+  padding-top:5%;
+  `
+
+  const Description = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  `
+  
+
+  const StyledTextarea = styled.textarea`
+  width:60%;
+  height:100%;
+  border-radius: 0.75rem; /* rounded-lg */
+  padding: 2rem; /* py-20 px-15, adjusted for actual CSS values */
+  background-color: white; /* bg-[#00344B] */
+  border: 1px solid #e2e8f0; /* border border-gray-100 */
+  outline: none; /* focus:outline-none */
+  &:focus {
+    border-color: #38E8C6; /* focus:border-[#38E8C6] */
+  }
+  color: black; /* text-gray-200 */
+  font-family: inherit; /* Assuming you want the font to be consistent with the rest of your app */
+
+`;
+
+const SubmitButton = styled.button`
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  width:20%;
+  margin-top:5%;
+  background-color:#E6E6FA;
+  `
             <button onClick={fetchCohereData} className='rounded-lg py-2 px-4 text-md font-semibold bg-blue-500 text-white hover:bg-blue-700 transition-colors duration-150 ease-in-out mb-4'>Autogenerate Description</button>
             <textarea className='rounded-lg py-3 px-7 bg-[#00344B] border border-gray-100 focus:outline-none focus:border-[#38E8C6] text-gray-200' rows={8} placeholder={description || 'If left empty our Generative AI will fill in the desciption itself'} onChange={(e) => setDescription(e.target.value)} />
           </div>
