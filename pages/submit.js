@@ -75,7 +75,8 @@ export default function Submit() {
     
   async function fetchCohereData() {
     try {
-      const response = await fetch('/api/cohereCall', {
+      console.log(name);
+      const response = await fetch('/api/cohereData', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ searchTerm: name })
@@ -139,7 +140,8 @@ export default function Submit() {
           </div>
           <div className="flex flex-col">
             <label className="text-gray-300 text-sm mb-3"> Description</label>
-            <textarea className='rounded-lg py-3 px-7 bg-[#00344B] border border-gray-100 focus:outline-none focus:border-[#38E8C6] text-gray-200' rows={8} placeholder='If left empty our Generative AI will fill in the desciption itself' onChange={(e) => setDescription(e.target.value)} />
+            <button onClick={fetchCohereData} className='rounded-lg py-2 px-4 text-md font-semibold bg-blue-500 text-white hover:bg-blue-700 transition-colors duration-150 ease-in-out mb-4'>Autogenerate Description</button>
+            <textarea className='rounded-lg py-3 px-7 bg-[#00344B] border border-gray-100 focus:outline-none focus:border-[#38E8C6] text-gray-200' rows={8} placeholder={description || 'If left empty our Generative AI will fill in the desciption itself'} onChange={(e) => setDescription(e.target.value)} />
           </div>
           <button className='rounded-lg py-3 px-7 text-lg font-semibold bg-[#2bbc9f]' onClick={submitProposal}>Submit Proposal</button>
         </div>
