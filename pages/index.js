@@ -124,14 +124,15 @@ export default function Home() {
         <div className='space-y-3 mb-12'>
           <h1 className='text-gray-200 text-2xl font-bold'>Welcome to {"<Example DAO>"}</h1>
           <p className='text-gray-400 text-lg font-semibold '>
-            {"<Replace this with a description of your DAO>"}
+            {"<DAO voting system>"}
           </p>
         </div>
         {!user.loggedIn ? null : !balance ? <button onClick={joinDAO} className='rounded-lg font-semibold text-md py-2 px-6 text-white bg-green-500'>Join this DAO</button> : <>
           <div className='flex items-center justify-between mb-7'>
             <h1 className='text-gray-200 text-2xl font-bold'>Proposals</h1>
+            <>Picture Card</>
             <Link href='/submit'>
-              <a className='rounded-lg font-semibold text-md py-2 px-6 bg-gray-300'>Submit Proposal</a>
+              <a className='rounded-lg font-semibold text-md py-2 px-6 bg-gray-300'>Donate</a>
             </Link>
           </div>
           {proposals.map((proposal, index) => (

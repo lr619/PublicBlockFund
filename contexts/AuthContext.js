@@ -55,7 +55,8 @@ export default function AuthProvider({ children }) {
     user,
     logOut,
     logIn,
-    balance
+    balance,
+    getBalance
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

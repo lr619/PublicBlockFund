@@ -1,7 +1,15 @@
 import * as fcl from "@onflow/fcl";
+import Link from 'next/link';
+
 import Router from "next/router";
-import { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
+
+import { useState,useEffect } from "react";
 import { NFTStorage } from "nft.storage";
+import DepositModal from '../components/Deposit';
+import { Dialog, Transition } from '@headlessui/react';
+
+
 
 export default function Submit() {
   const [name, setName] = useState('');
@@ -11,8 +19,10 @@ export default function Submit() {
   const [preview, setPreview] = useState();
   const [ipfsCid, setIpfsCid] = useState();
 
+
   const NFT_STORAGE_TOKEN = process.env.NEXT_PUBLIC_NFTSTORAGE_KEY;
   const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
+
 
   async function uploadToIPFS(file) {
     let prev = URL.createObjectURL(file)
@@ -69,7 +79,7 @@ export default function Submit() {
     <div className='flex justify-center pt-20'>
       <div className='w-[70%] space-y-6'>
         <div className='space-y-3 mb-12'>
-          <h1 className='text-gray-200 text-2xl text-center font-bold uppercase'>Submit your Proposal</h1>
+          <h1 className='text-gray-200 text-2xl text-center font-bold uppercase'>What is your reason for fundraising?</h1>
         </div>
         <div className='flex flex-col space-y-7'>
           <div className='flex flex-col justify-between'>
@@ -99,15 +109,7 @@ export default function Submit() {
                     name="start"
                     onChange={(e) => setStartTime(e.target.value)} />
                 </label>
-                <label htmlFor="end" className="flex flex-col">
-                  End Time
-                  <input
-                    type="datetime-local"
-                    className="bg-[#00344B] rounded-lg px-5 py-2"
-                    id="end"
-                    name="end"
-                    onChange={(e) => setEndTime(e.target.value)} />
-                </label>
+
               </div>
             </div>
 
