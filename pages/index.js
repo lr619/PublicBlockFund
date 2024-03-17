@@ -127,7 +127,7 @@ export default function Home() {
             {"Crowdfunding on the Blockchain for you!"}
           </p>
         </div>
-        {!user.loggedIn ? null : !balance ? <button onClick={joinDAO} className='rounded-lg font-semibold text-md py-2 px-6 text-white bg-green-500'>Join this DAO</button> : <>
+        {!user.loggedIn ? null : !balance ? <button onClick={joinDAO} className='rounded-lg font-semibold text-md py-2 px-6 text-white bg-green-500'>Join this fund</button> : <>
           <div className='flex items-center justify-between mb-7'>
             <h1 className='text-gray-200 text-2xl font-bold'>Charity Drives</h1>
             <>Picture Card</>

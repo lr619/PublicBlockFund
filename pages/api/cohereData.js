@@ -15,7 +15,7 @@ export default function handler(req, res) {
             });
             const response = await cohere.generate({
                 model: "command",
-                prompt: `Provide a humorous descriptor for the following charity, ${searchTerm}\n`,
+                prompt: `Humorously describe what a charity called ${searchTerm} does`,
                 maxTokens: 300,
                 temperature: 0.9,
                 k: 0,

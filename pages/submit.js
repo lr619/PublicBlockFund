@@ -35,44 +35,10 @@ export default function Submit() {
   }
 
   async function submitProposal() {
-    setStartTime(Date.now() / 1000);
-     setEndTime(new Date(startTime) / 1000);
+    const startTime = Date.now() / 1000;
+    const endTime = +new Date(startTime) / 1000;
     console.log(description);
     console.log(name, description, ipfsCid, startTime, endTime);
-    if (!description && name) { // Check if `description` is empty and `name` is not
-    console.log("Fetching description for: ", name);
-    await fetchCohereData();
-    }else{
-      console.log("Description is already set.")
-    await createProposal()
-  }
-}
-  async function fetchCohereData() {
-    try {
-      
-      const response = await fetch('api/cohereData', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ searchTerm: name })
-      });
-  
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status} ${response.statusText}`);
-      }
-  
-      const data = await response.json();
-      setDescription(data.data); // Set the fetched description
-      console.log("Received description:", data.data);
-      
-      // After successfully fetching and setting description, proceed to create the proposal
-      await createProposal();
-    } catch (error) {
-      console.error("Fetching description failed:", error);
-    }
-  }
-    
-async function createProposal() {
-  try {
     const transactionId = await fcl.mutate({
       cadence: `
       import Vote from 0xDeployer
@@ -104,10 +70,33 @@ async function createProposal() {
 
     console.log('Transaction Id:', transactionId);
     Router.push("/");
-  } catch (error) {
-    console.error("Submitting proposal failed:", error);
+  
   }
-}
+    
+  async function fetchCohereData() {
+    try {
+      const response = await fetch('/api/cohereCall', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ searchTerm: name })
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`);
+      }
+  
+      const data = await response.json();
+      setDescription(data.data); // Set the fetched description
+      console.log("Received description:", data.data);
+      
+      // After successfully fetching and setting description, proceed to create the proposal
+      await createProposal();
+    } catch (error) {
+      console.error("Fetching description failed:", error);
+    }
+  }
+    
+
 
   return (
     <div className='flex justify-center pt-20'>
