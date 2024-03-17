@@ -84,7 +84,7 @@ export default function DepositModal({ refreshInfo }) {
         <button
           type="button"
           onClick={openModal}
-          className="rounded-lg px-9 py-2 border bg-[#2bbc9f] border-green-600 text-white w-full"
+          className="rounded-lg px-9 py-2 border bg-[black] text-white w-full"
         >
           Deposit
         </button>
@@ -115,32 +115,32 @@ export default function DepositModal({ refreshInfo }) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full  max-w-md transform overflow-hidden rounded-2xl bg-gray-800 p-6  shadow-xl transition-all">
+                <Dialog.Panel className="w-full  max-w-md transform overflow-hidden rounded-2xl bg-white p-6  shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-300 pb-3"
+                    className="text-lg font-medium leading-6 text-black-300 pb-3"
                   >
                     Treasury Deposit
                   </Dialog.Title>
                   <div className="mt-2 text-left flex flex-col items-center">
                     <div className="flex flex-col">
-                      <label className="text-gray-300 text-xs mb-3"> Amount</label>
+                      <label className="text-black-300 text-xs mb-3"> Amount</label>
                       <input type="text" placeholder='10.0'
-                        className='px-7 py-2 focus:outline-none text-gray-200 focus:border-[#38E8C6] 
-                        bg-[#00344B] border rounded-lg  border-gray-400' onChange={(e) => setAmount(e.target.value)} />
+                        className='px-7 py-2 focus:outline-none text-grey
+                        bg-[light-grey] border rounded-lg  border-black' onChange={(e) => setAmount(e.target.value)} />
                     </div>
                     <div className="flex flex-col pt-8">
-                      <label className="text-gray-300 text-xs mb-3"> Description</label>
-                      <input type="text" placeholder='A gift for the treasury...'
-                        className='px-7 py-3  focus:outline-none text-gray-200 focus:border-[#38E8C6] 
-                        bg-[#00344B] border rounded-lg  border-gray-400' onChange={(e) => setDescription(e.target.value)} />
+                      <label className="text-black-300 text-xs mb-3"> Description</label>
+                      <input type="text" placeholder='A gift for fund raiser...'
+                        className='px-7 py-3  focus:outline-none text-grey
+                        bg-[light-grey] border rounded-lg  border-black' onChange={(e) => setDescription(e.target.value)} />
                     </div>
                   </div>
 
                   <div className="mt-7">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-6 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-black px-6 py-2 text-sm font-medium text-white hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-black-500 focus-visible:ring-offset-2"
                       onClick={depositToTreasury}
                     >
                       {!processing ? 'Deposit' : 'Depositing...'}
