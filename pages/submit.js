@@ -138,13 +138,16 @@ export default function Submit() {
             </ImgAndStartTime>
 
             </SubContentWrapper>
+            <AutoGenerateButton onClick={fetchCohereData}>Autogenerate Description</AutoGenerateButton>
+        
           <Description>
             <label className="text-gray-300 text-sm mb-3"> Description</label>
             <StyledTextarea
-      rows={8}
-      placeholder='This is a vote to determine if Jacob Tucker should be given 1 million dollars...'
-      onChange={(e) => setDescription(e.target.value)}
-    />          </Description>
+            rows={8}
+            placeholder={description || 'If left empty our Generative AI will fill in the description itself'}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />          </Description>
           <SubmitButton className='rounded-lg py-3 px-7 text-lg font-semibold bg-[white]' onClick={submitProposal}>Submit Block Fund</SubmitButton>
     </ContentWrapper>
   )
@@ -225,13 +228,19 @@ const SubmitButton = styled.button`
   width:20%;
   margin-top:5%;
   background-color:#E6E6FA;
-  `
-            <button onClick={fetchCohereData} className='rounded-lg py-2 px-4 text-md font-semibold bg-blue-500 text-white hover:bg-blue-700 transition-colors duration-150 ease-in-out mb-4'>Autogenerate Description</button>
-            <textarea className='rounded-lg py-3 px-7 bg-[#00344B] border border-gray-100 focus:outline-none focus:border-[#38E8C6] text-gray-200' rows={8} placeholder={description || 'If left empty our Generative AI will fill in the desciption itself'} onChange={(e) => setDescription(e.target.value)} />
-          </div>
-          <button className='rounded-lg py-3 px-7 text-lg font-semibold bg-[#2bbc9f]' onClick={submitProposal}>Submit Proposal</button>
-        </div>
-      </div>
-    </div>
-  )
-}
+  `;
+
+const AutoGenerateButton = styled.button`
+  margin-bottom: 1rem; /* Adjust as needed for your layout */
+  background-color: #007bff; /* Primary blue */
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.375rem; /* rounded-lg */
+  transition: background-color 150ms ease-in-out;
+
+  &:hover {
+    background-color: #0056b3; /* Darker blue */
+  }
+`;
