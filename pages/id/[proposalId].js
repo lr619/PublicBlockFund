@@ -235,15 +235,17 @@ export default function Id() {
 }
 const ContentWrapper = styled.div`
   display:flex;
+  position:relative;
   flex-direction:column;
   padding-top:5%;
+  width:30%;
 `
 const WholeContentWrapper = styled.div`
+  width:98.8vw;
   display:flex;
   flex-direction:row;
   justify-content:center;
   text-align:center;
-  gap:10%;
   background-color:#1a1d25;
   height:80vw;
   padding-top:5%;
@@ -254,17 +256,22 @@ const LeftContentWrapper = styled.div`
   justify-content:center;
   align-items:center;
   text-align:center;
+  width:60%;
+  gap:1rem;
   `
 
 const Discription = styled.div`
   color:white;
-  width:100%;
+  width:80%;
   height:100%;
   border-radius:10px;
   padding:2rem;
   color:white;
   font-size:1.5rem;
   font-family: "Times New Roman", Times, serif;
+  border:solid white;
+  background-color:black
+
   `
   
 

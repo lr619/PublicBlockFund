@@ -138,7 +138,7 @@ export default function Submit() {
             </ImgAndStartTime>
 
             </SubContentWrapper>
-            <AutoGenerateButton onClick={fetchCohereData}>Autogenerate Description</AutoGenerateButton>
+ q                <AutoGenerateButton onClick={fetchCohereData}>Autogenerate Description</AutoGenerateButton>
         
           <Description>
             <label className="text-gray-300 text-sm mb-3"> Description</label>
