@@ -11,8 +11,8 @@ function MyApp({ Component, pageProps }) {
         <main className='container mx-auto flex-1 p-5'>
           <Navbar />
           <Head>
-            <title>4-VOTING</title>
-            <meta name="description" content="Used by Emerald Academy" />
+            <title>BlockFund</title>
+            <meta name="description" content="BlockFund the World" />
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Component {...pageProps} />
