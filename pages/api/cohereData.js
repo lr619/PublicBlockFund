@@ -11,7 +11,7 @@ export default function handler(req, res) {
     const fetchCohereData = async () => {    
         try {
             const cohere = new CohereClient({
-                token: "Di2DnKoyJTQjx0HzCR8hpHB1gh8dl5G4qdrx9kuS", // Replace with your actual API key
+                token: "token", // Replace with your actual API key
             });
             const response = await cohere.generate({
                 model: "command",
