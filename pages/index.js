@@ -122,17 +122,17 @@ export default function Home() {
     <div className='flex justify-center pt-20'>
       <div className='w-[70%] space-y-6'>
         <div className='space-y-3 mb-12'>
-          <h1 className='text-gray-200 text-2xl font-bold'>Welcome to {"<Example DAO>"}</h1>
+          <h1 className='text-gray-200 text-2xl font-bold'>Welcome to {"BlockFund"}</h1>
           <p className='text-gray-400 text-lg font-semibold '>
-            {"<DAO voting system>"}
+            {"Crowdfunding on the Blockchain for you!"}
           </p>
         </div>
         {!user.loggedIn ? null : !balance ? <button onClick={joinDAO} className='rounded-lg font-semibold text-md py-2 px-6 text-white bg-green-500'>Join this DAO</button> : <>
           <div className='flex items-center justify-between mb-7'>
-            <h1 className='text-gray-200 text-2xl font-bold'>Proposals</h1>
+            <h1 className='text-gray-200 text-2xl font-bold'>Charity Drives</h1>
             <>Picture Card</>
             <Link href='/submit'>
-              <a className='rounded-lg font-semibold text-md py-2 px-6 bg-gray-300'>Donate</a>
+              <a className='rounded-lg font-semibold text-md py-2 px-6 bg-gray-300'>Block Fund Me</a>
             </Link>
           </div>
           {proposals.map((proposal, index) => (
